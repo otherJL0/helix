@@ -9,24 +9,27 @@ fn validate_selected_text(selected_text: &str) -> Option<(char, char)> {
         return None;
     }
 
+    // Ensure start and end chars are the same and are single or double quotes
     if start != end || !(start == '\'' || start == '"') {
         return None;
     }
+
     if !letter.is_ascii_alphabetic() {
         return None;
     }
+
     Some((start, letter))
 }
 
 fn increment_char(letter: char, amount: i64) -> char {
-    let start = if letter.is_ascii_uppercase() {
+    let alpha = if letter.is_ascii_uppercase() {
         b'A'
     } else {
         b'a'
     };
-    let char_index = letter as u8 - start;
+    let char_index = letter as u8 - alpha;
     let updated_char_index = ((char_index as i64 + amount).rem_euclid(26)) as u8;
-    (start + updated_char_index) as char
+    (alpha + updated_char_index) as char
 }
 
 pub fn increment(selected_text: &str, amount: i64) -> Option<String> {
