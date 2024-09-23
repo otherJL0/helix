@@ -6034,9 +6034,20 @@ fn increment_impl(cx: &mut Context, increment_direction: IncrementDirection) {
     for range in selection {
         let selected_text: Cow<str> = range.fragment(text);
         let new_from = ((range.from() as i128) + cumulative_length_diff) as usize;
+<<<<<<< Updated upstream
         let incremented = [increment::integer, increment::date_time]
             .iter()
             .find_map(|incrementor| incrementor(selected_text.as_ref(), amount));
+=======
+        let incremented = [
+            increment::integer,
+            increment::date_time,
+            increment::boolean,
+            increment::alphabetic,
+        ]
+        .iter()
+        .find_map(|incrementor| incrementor(selected_text.as_ref(), amount));
+>>>>>>> Stashed changes
 
         amount += increase_by;
 
